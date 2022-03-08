@@ -1,0 +1,56 @@
+ofritavor@ofritavor-VirtualBox:~/CPP/Ex1_a/mat-a$ bash grade
+--- 0 seconds
+
+
+### Cleaning old files ###
+rm -f *.o demo test
+
+
+### Check 1: our demo program should compile with your class
+! timeout 30 make -f Makefile demo
+clang++-9  -std=c++2a -Werror --compile Demo.cpp -o Demo.o
+clang++-9  -std=c++2a -Werror --compile mat.cpp -o mat.o
+clang++-9  -std=c++2a -Werror Demo.o mat.o -o demo
+--- 1 seconds
+### Score 1: 100
+
+
+### Check 2: our demo program should run without errors
+! timeout 30 ./demo
+@@@@@@@@@
+@-------@
+@-@@@@@-@
+@-@---@-@
+@-@@@@@-@
+@-------@
+@@@@@@@@@
+
+@@@@@@@@@@@@@
+@-----------@
+@-@@@@@@@@@-@
+@-----------@
+@@@@@@@@@@@@@
+
+   caught exception: Mat size is always odd.
+--- 1 seconds
+### Score 2: 100
+
+
+### Check 3: your test should compile 
+! timeout 30 make -f Makefile test
+clang++-9  -std=c++2a -Werror --compile TestCounter.cpp -o TestCounter.o
+clang++-9  -std=c++2a -Werror --compile Test.cpp -o Test.o
+clang++-9  -std=c++2a -Werror TestCounter.o Test.o mat.o -o test
+--- 5 seconds
+### Score 3: 100
+
+
+### Check 4: you should write some new tests
+! timeout 30 ./test
+[doctest] doctest version is "2.3.7"
+[doctest] run with "--help" for options
+--- 5 seconds
+### Score 4: 100
+
+
+Grade: 100
